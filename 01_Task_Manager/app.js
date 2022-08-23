@@ -22,7 +22,6 @@ const start = async () => {
   // we are using asych await because we want database to connect first and then the UI
   try {
     await connectDB(process.env.MONGO_URI);
-
     app.listen(port, console.log(`server is listening to port ${port}...`));
   } catch (err) {
     console.log(err);
