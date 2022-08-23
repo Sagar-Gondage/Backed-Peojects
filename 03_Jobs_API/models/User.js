@@ -25,10 +25,15 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+// here we have to user regular function and this keyword because we want to access the password from schema
 UserSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+UserSchema.methods.getName = function () {
+  return this.name;
+};
 
 module.exports = mongoose.model("user", UserSchema);
